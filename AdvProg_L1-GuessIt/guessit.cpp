@@ -58,7 +58,7 @@ string getAnswer(int number, int randomNumber)
     }
     else
     {
-        answer = "Congratulations! You win.";
+        answer = "Congratulation! You win.";
     }
 
     return answer;
