@@ -53,6 +53,7 @@ void Game::snakeMoveTo(Position pos)
 	// END CODE HERE
 	switch (getCellType(pos))
 	{
+	case CELL_SNAKE:
 	case CELL_OFF_BOARD:
 		status = GAME_OVER;
 		break;
