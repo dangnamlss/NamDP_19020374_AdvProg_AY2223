@@ -151,100 +151,100 @@ void Game::nextStep()
 
 		snake.move(currentDirection);
 	}
+}
+/***
+ * PLEASE REPLACE LINES MARKED WITH '// YOUR CODE HERE'
+ *
+ * When snake have already eaten a cherry, please add new cherry inside the play screen with random position
+ *
+ * Args:
+ * 		// none
+ * Returns:
+ * 		// none
+ *
+ ***/
 
-	/***
-	 * PLEASE REPLACE LINES MARKED WITH '// YOUR CODE HERE'
-	 *
-	 * When snake have already eaten a cherry, please add new cherry inside the play screen with random position
-	 *
-	 * Args:
-	 * 		// none
-	 * Returns:
-	 * 		// none
-	 *
-	 ***/
-
-	void Game::addCherry()
+void Game::addCherry()
+{
+	do
 	{
-		do
+		// init a random position inside the play screen (width, height)
+		// Suggestion: use rand() function
+
+		Position randomPos;
+		randomPos = Position(rand() % width, rand() % height);
+
+		// check if the randomPos is EMPTY
+		if (getCellType(randomPos) == CELL_EMPTY)
 		{
-			// init a random position inside the play screen (width, height)
-			// Suggestion: use rand() function
 
-			Position randomPos;
-			randomPos = Position(rand() % width, rand() % height);
+			// assign the cherry position as randomPos, and set randomPos type as CELL_CHERRY
+			cherryPosition = randomPos;
+			setCellType(randomPos, CELL_CHERRY);
 
-			// check if the randomPos is EMPTY
-			if (getCellType(randomPos) == CELL_EMPTY)
-			{
-
-				// assign the cherry position as randomPos, and set randomPos type as CELL_CHERRY
-				cherryPosition = randomPos;
-				setCellType(randomPos, CELL_CHERRY);
-
-				break;
-			}
-		} while (true);
-	}
-
-	/***
-	 * PLEASE UPDATE THIS METHOD
-	 *
-	 * set cell of a position as intended type.
-	 *
-	 * Args:
-	 * 		pos (Position): a chosen position
-	 * 		cellType (CellType): cell type of pos
-	 * Returns:
-	 * 		// none
-	 *
-	 ***/
-	void Game::setCellType(Position pos, CellType cellType)
-	{
-		// if position is inside the play screen (width, height), set to the cellType.
-		// Otherwise, do nothing
-		// Suggestion: use pos.isInsideBox(...) in Position class
-		//
-		// START CODE HERE
-		if (pos.isInsideBox(0, 0, width, height))
-		{
-			squares[pos.y][pos.x] = cellType;
+			break;
 		}
-		// END CODE HERE
-	}
+	} while (true);
+}
 
-	// DO NOT change this method
-	CellType Game::getCellType(Position pos) const
+/***
+ * PLEASE UPDATE THIS METHOD
+ *
+ * set cell of a position as intended type.
+ *
+ * Args:
+ * 		pos (Position): a chosen position
+ * 		cellType (CellType): cell type of pos
+ * Returns:
+ * 		// none
+ *
+ ***/
+void Game::setCellType(Position pos, CellType cellType)
+{
+	// if position is inside the play screen (width, height), set to the cellType.
+	// Otherwise, do nothing
+	// Suggestion: use pos.isInsideBox(...) in Position class
+	//
+	// START CODE HERE
+	if (pos.isInsideBox(0, 0, width, height))
 	{
-		return pos.isInsideBox(0, 0, width, height) ? squares[pos.y][pos.x] : CELL_OFF_BOARD;
+		squares[pos.y][pos.x] = cellType;
 	}
+	// END CODE HERE
+}
 
-	// DO NOT change this method
-	vector<Position> Game::getSnakePositions() const
-	{
-		return snake.getPositions();
-	}
+// DO NOT change this method
+CellType Game::getCellType(Position pos) const
+{
+	return pos.isInsideBox(0, 0, width, height) ? squares[pos.y][pos.x] : CELL_OFF_BOARD;
+}
 
-	// DO NOT change this method
-	GameStatus Game::getGameStatus()
-	{
-		return status;
-	}
+// DO NOT change this method
+vector<Position> Game::getSnakePositions() const
+{
+	return snake.getPositions();
+}
 
-	// DO NOT change this method
-	int Game::getWidth()
-	{
-		return width;
-	}
+// DO NOT change this method
+GameStatus Game::getGameStatus()
+{
+	return status;
+}
 
-	// DO NOT change this method
-	int Game::getHeight()
-	{
-		return height;
-	}
+// DO NOT change this method
+int Game::getWidth()
+{
+	return width;
+}
 
-	// DO NOT change this method
-	Snake Game::getSnake()
-	{
-		return snake;
-	}
+// DO NOT change this method
+int Game::getHeight()
+{
+	return height;
+}
+
+// DO NOT change this method
+Snake Game::getSnake()
+{
+	return snake;
+}
